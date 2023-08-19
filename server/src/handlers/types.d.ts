@@ -1,5 +1,3 @@
-export abstract interface Msg {}
-
 export interface CreateMsg {
   targetParent: string;
   targetKey: string;
