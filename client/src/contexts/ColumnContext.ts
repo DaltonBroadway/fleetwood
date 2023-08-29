@@ -1,48 +1,7 @@
 import { createContext } from "react";
 import { useBasicReducer } from "../hooks/useBasicReducer";
-
-// interface State {
-//   seq?: number;
-//   width?: number;
-// }
-
-// export interface ColumnState {
-//   [id: string]: State;
-// }
-
-// type Action = "create-column" | "update-column" | "delete-column";
-
-// interface Payload extends State {
-//   column_id: string;
-// }
-
-// export interface ColumnAction {
-//   action: Action;
-//   payload: Payload;
-// }
-
-// const columnReducer = (
-//   state: ColumnState,
-//   { action, payload }: ColumnAction
-// ) => {
-//   const { column_id, ...incomingState } = payload;
-//   switch (action) {
-//     case "create-column": {
-//       return { ...state, [column_id]: incomingState };
-//     }
-//     case "update-column": {
-//       return { ...state, [column_id]: { ...incomingState } };
-//     }
-//     case "delete-column": {
-//       const { [column_id]: drop, ...newState } = state;
-//       return newState;
-//     }
-//     default:
-//       return state;
-//   }
-// };
-
-// const [columns, columnDispatch] = useReducer(columnReducer, {});
+import { useInboundSocketBroker } from "../hooks/useInboundSocketBroker";
+import { useOutboundSocketBroker } from "../hooks/useOutboundSocketBroker";
 
 export interface Column {
   seq: number;
@@ -50,5 +9,12 @@ export interface Column {
 }
 
 const [columns, columnDispatch] = useBasicReducer<Column>({});
+
+useInboundSocketBroker<Column>("column", columnDispatch);
+const outboundDispatch = useOutboundSocketBroker<Column>(
+  "column",
+  columnDispatch
+);
+
 export const ColumnContext = createContext(columns);
-export const ColumnDispatchContext = createContext(columnDispatch);
+export const ColumnDispatchContext = createContext(outboundDispatch);

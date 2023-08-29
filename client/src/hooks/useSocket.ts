@@ -1,15 +1,11 @@
-import { useEffect, useRef } from "react";
-import io, { ManagerOptions, Socket, SocketOptions } from "socket.io-client";
+import { createContext } from "react";
+import { io } from "socket.io-client";
 
-export const useSocket = (
-  uri: string,
-  opts?: Partial<ManagerOptions & SocketOptions> | undefined
-): Socket => {
-  const { current: socket } = useRef(io(uri, opts));
-  useEffect(() => {
-    return () => {
-      if (socket) socket.close();
-    };
-  }, [socket]);
+const PORT: string = process.env.PORT || "8080";
+const URL = `http://localhost:${PORT}`;
+
+const socket = io(URL);
+
+export const useSocket = () => {
   return socket;
 };

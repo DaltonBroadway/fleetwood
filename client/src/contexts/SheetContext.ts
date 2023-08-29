@@ -1,45 +1,9 @@
+// Provides a list of objects that represent child component state
+// and a function to update both local and server state through context
 import { createContext } from "react";
 import { useBasicReducer } from "../hooks/useBasicReducer";
-
-// interface State {
-//   name?: string;
-//   sheetIds?: string;
-// }
-
-// export interface SheetState {
-//   [id: string]: State;
-// }
-
-// type Action = "create-sheet" | "update-sheet" | "delete-sheet";
-
-// interface Payload extends State {
-//   sheet_id: string;
-// }
-
-// export interface SheetAction {
-//   action: Action;
-//   payload: Payload;
-// }
-
-// const sheetReducer = (state: SheetState, { action, payload }: SheetAction) => {
-//   const { sheet_id, ...incomingState } = payload;
-//   switch (action) {
-//     case "create-sheet": {
-//       return { ...state, [sheet_id]: incomingState };
-//     }
-//     case "update-sheet": {
-//       return { ...state, [sheet_id]: { ...incomingState } };
-//     }
-//     case "delete-sheet": {
-//       const { [sheet_id]: drop, ...newState } = state;
-//       return newState;
-//     }
-//     default:
-//       return state;
-//   }
-// };
-
-// const [sheets, sheetDispatch] = useReducer(sheetReducer, {});
+import { useInboundSocketBroker } from "../hooks/useInboundSocketBroker";
+import { useOutboundSocketBroker } from "../hooks/useOutboundSocketBroker";
 
 export interface Sheet {
   name: string;
@@ -47,5 +11,9 @@ export interface Sheet {
 }
 
 const [sheets, sheetDispatch] = useBasicReducer<Sheet>({});
+
+useInboundSocketBroker<Sheet>("sheet", sheetDispatch);
+const outboundDispatch = useOutboundSocketBroker<Sheet>("sheet", sheetDispatch);
+
 export const SheetContext = createContext(sheets);
-export const SheetDispatchContext = createContext(sheetDispatch);
+export const SheetDispatchContext = createContext(outboundDispatch);
