@@ -1,25 +1,15 @@
-import { useContext } from "react";
-import {
-  ColumnContext,
-  ColumnDispatchContext,
-} from "../contexts/ColumnContext";
-import { RowContext, RowDispatchContext } from "../contexts/RowContext";
-import { CellContext, CellDispatchContext } from "../contexts/CellContext";
-import { State } from "../hooks/useBasicReducer";
-import {
-  Sheet as ISheet,
-  SheetContext,
-  SheetDispatchContext,
-} from "../contexts/SheetContext";
+import { ColumnContextComponent } from "../contexts/ColumnContext";
+import { RowContextComponent } from "../contexts/RowContext";
+import { CellContextComponent } from "../contexts/CellContext";
 
-export const Sheet = (initialState: State<ISheet>) => {
-  const columns = useContext(ColumnContext);
-  const columnsDispatch = useContext(ColumnDispatchContext);
-  const sheets = useContext(SheetContext);
-  const sheetsDispatch = useContext(SheetDispatchContext);
-  const rows = useContext(RowContext);
-  const rowsDispatch = useContext(RowDispatchContext);
-  const cells = useContext(CellContext);
-  const cellsDispatch = useContext(CellDispatchContext);
-  return <div className="sheet"></div>;
+export const Sheet = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <ColumnContextComponent>
+      <RowContextComponent>
+        <CellContextComponent>
+          <div className="sheet">{children}</div>
+        </CellContextComponent>
+      </RowContextComponent>
+    </ColumnContextComponent>
+  );
 };

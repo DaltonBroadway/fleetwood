@@ -18,9 +18,11 @@ const outboundDispatch = useOutboundSocketBroker<Sheet>("sheet", sheetDispatch);
 export const SheetContext = createContext(sheets);
 export const SheetDispatchContext = createContext(outboundDispatch);
 
-export const SheetContextComponent = (
-  children: JSX.Element | JSX.Element[]
-) => {
+export const SheetContextComponent = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   return (
     <SheetContext.Provider value={sheets}>
       <SheetDispatchContext.Provider value={outboundDispatch}>

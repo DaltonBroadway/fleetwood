@@ -19,9 +19,11 @@ const outboundDispatch = useOutboundSocketBroker<Column>(
 export const ColumnContext = createContext(columns);
 export const ColumnDispatchContext = createContext(outboundDispatch);
 
-export const ColumnContextComponent = (
-  children: JSX.Element | JSX.Element[]
-) => {
+export const ColumnContextComponent = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   return (
     <ColumnContext.Provider value={columns}>
       <ColumnDispatchContext.Provider value={outboundDispatch}>

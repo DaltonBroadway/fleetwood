@@ -17,7 +17,11 @@ const outboundDispatch = useOutboundSocketBroker<Cell>("cell", cellDispatch);
 export const CellContext = createContext(cells);
 export const CellDispatchContext = createContext(outboundDispatch);
 
-export const CellContextComponent = (children: JSX.Element | JSX.Element[]) => {
+export const CellContextComponent = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   return (
     <CellContext.Provider value={cells}>
       <CellDispatchContext.Provider value={outboundDispatch}>

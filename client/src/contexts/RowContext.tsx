@@ -16,7 +16,11 @@ const outboundDispatch = useOutboundSocketBroker<Row>("row", rowDispatch);
 export const RowContext = createContext(rows);
 export const RowDispatchContext = createContext(outboundDispatch);
 
-export const RowContextComponent = (children: JSX.Element | JSX.Element[]) => {
+export const RowContextComponent = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   return (
     <RowContext.Provider value={rows}>
       <RowDispatchContext.Provider value={outboundDispatch}>

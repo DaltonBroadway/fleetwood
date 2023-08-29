@@ -1,14 +1,9 @@
-import { useContext } from "react";
-import { Sheet } from "./Sheet";
-import { SheetContext } from "../contexts/SheetContext";
+import { SheetContextComponent } from "../contexts/SheetContext";
 
-export const Book = () => {
-  const sheets = useContext(SheetContext);
+export const Book = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="book">
-      {Object.entries(sheets).map((sheet) => {
-        return <Sheet tate={sheet[1]}></Sheet>;
-      })}
-    </div>
+    <SheetContextComponent>
+      <div className="book">{children}</div>
+    </SheetContextComponent>
   );
 };
