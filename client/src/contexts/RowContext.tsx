@@ -15,3 +15,13 @@ const outboundDispatch = useOutboundSocketBroker<Row>("row", rowDispatch);
 
 export const RowContext = createContext(rows);
 export const RowDispatchContext = createContext(outboundDispatch);
+
+export const RowContextComponent = (children: JSX.Element | JSX.Element[]) => {
+  return (
+    <RowContext.Provider value={rows}>
+      <RowDispatchContext.Provider value={outboundDispatch}>
+        {children}
+      </RowDispatchContext.Provider>
+    </RowContext.Provider>
+  );
+};
