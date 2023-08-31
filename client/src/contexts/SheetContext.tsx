@@ -1,22 +1,13 @@
 // Provides a list of objects that represent child component state
 // and a function to update both local and server state through context
 import { createContext } from "react";
-import { useBasicReducer } from "../hooks/useBasicReducer";
-import { useInboundSocketBroker } from "../hooks/useInboundSocketBroker";
-import { useOutboundSocketBroker } from "../hooks/useOutboundSocketBroker";
+import { Sheet } from "../hooks/types";
+import { useServerSyncedState } from "../hooks/useServerSyncedState";
 
-export interface Sheet {
-  name: string;
-  seq: number;
-}
-
-const [sheets, sheetDispatch] = useBasicReducer<Sheet>({});
-
-useInboundSocketBroker<Sheet>("sheet", sheetDispatch);
-const outboundDispatch = useOutboundSocketBroker<Sheet>("sheet", sheetDispatch);
+const [sheets, sheetsDispatch] = useServerSyncedState<Sheet>("sheet", {});
 
 export const SheetContext = createContext(sheets);
-export const SheetDispatchContext = createContext(outboundDispatch);
+export const SheetDispatchContext = createContext(sheetsDispatch);
 
 export const SheetContextComponent = ({
   children,
@@ -25,7 +16,7 @@ export const SheetContextComponent = ({
 }) => {
   return (
     <SheetContext.Provider value={sheets}>
-      <SheetDispatchContext.Provider value={outboundDispatch}>
+      <SheetDispatchContext.Provider value={sheetsDispatch}>
         {children}
       </SheetDispatchContext.Provider>
     </SheetContext.Provider>

@@ -1,21 +1,11 @@
 import { createContext } from "react";
-import { useBasicReducer } from "../hooks/useBasicReducer";
-import { useInboundSocketBroker } from "../hooks/useInboundSocketBroker";
-import { useOutboundSocketBroker } from "../hooks/useOutboundSocketBroker";
+import { Cell } from "../hooks/types";
+import { useServerSyncedState } from "../hooks/useServerSyncedState";
 
-export interface Cell {
-  column: number;
-  row: number;
-  value: string;
-}
-
-const [cells, cellDispatch] = useBasicReducer<Cell>({});
-
-useInboundSocketBroker<Cell>("cell", cellDispatch);
-const outboundDispatch = useOutboundSocketBroker<Cell>("cell", cellDispatch);
+const [cells, cellsDispatch] = useServerSyncedState<Cell>("cell", {});
 
 export const CellContext = createContext(cells);
-export const CellDispatchContext = createContext(outboundDispatch);
+export const CellDispatchContext = createContext(cellsDispatch);
 
 export const CellContextComponent = ({
   children,
@@ -24,7 +14,7 @@ export const CellContextComponent = ({
 }) => {
   return (
     <CellContext.Provider value={cells}>
-      <CellDispatchContext.Provider value={outboundDispatch}>
+      <CellDispatchContext.Provider value={cellsDispatch}>
         {children}
       </CellDispatchContext.Provider>
     </CellContext.Provider>

@@ -1,23 +1,11 @@
 import { createContext } from "react";
-import { useBasicReducer } from "../hooks/useBasicReducer";
-import { useInboundSocketBroker } from "../hooks/useInboundSocketBroker";
-import { useOutboundSocketBroker } from "../hooks/useOutboundSocketBroker";
+import { Column } from "../hooks/types";
+import { useServerSyncedState } from "../hooks/useServerSyncedState";
 
-export interface Column {
-  seq: number;
-  width: number;
-}
-
-const [columns, columnDispatch] = useBasicReducer<Column>({});
-
-useInboundSocketBroker<Column>("column", columnDispatch);
-const outboundDispatch = useOutboundSocketBroker<Column>(
-  "column",
-  columnDispatch
-);
+const [columns, columnsDispatch] = useServerSyncedState<Column>("column", {});
 
 export const ColumnContext = createContext(columns);
-export const ColumnDispatchContext = createContext(outboundDispatch);
+export const ColumnDispatchContext = createContext(columnsDispatch);
 
 export const ColumnContextComponent = ({
   children,
@@ -26,7 +14,7 @@ export const ColumnContextComponent = ({
 }) => {
   return (
     <ColumnContext.Provider value={columns}>
-      <ColumnDispatchContext.Provider value={outboundDispatch}>
+      <ColumnDispatchContext.Provider value={columnsDispatch}>
         {children}
       </ColumnDispatchContext.Provider>
     </ColumnContext.Provider>

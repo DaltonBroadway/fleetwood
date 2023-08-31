@@ -1,20 +1,11 @@
 import { createContext } from "react";
-import { useBasicReducer } from "../hooks/useBasicReducer";
-import { useInboundSocketBroker } from "../hooks/useInboundSocketBroker";
-import { useOutboundSocketBroker } from "../hooks/useOutboundSocketBroker";
+import { Row } from "../hooks/types";
+import { useServerSyncedState } from "../hooks/useServerSyncedState";
 
-export interface Row {
-  seq: number;
-  height: number;
-}
-
-const [rows, rowDispatch] = useBasicReducer<Row>({});
-
-useInboundSocketBroker<Row>("row", rowDispatch);
-const outboundDispatch = useOutboundSocketBroker<Row>("row", rowDispatch);
+const [rows, rowsDispatch] = useServerSyncedState<Row>("row", {});
 
 export const RowContext = createContext(rows);
-export const RowDispatchContext = createContext(outboundDispatch);
+export const RowDispatchContext = createContext(rowsDispatch);
 
 export const RowContextComponent = ({
   children,
@@ -23,7 +14,7 @@ export const RowContextComponent = ({
 }) => {
   return (
     <RowContext.Provider value={rows}>
-      <RowDispatchContext.Provider value={outboundDispatch}>
+      <RowDispatchContext.Provider value={rowsDispatch}>
         {children}
       </RowDispatchContext.Provider>
     </RowContext.Provider>

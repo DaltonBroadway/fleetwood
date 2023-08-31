@@ -1,4 +1,3 @@
-import { createContext } from "react";
 import { io } from "socket.io-client";
 
 const PORT: string = process.env.PORT || "8080";

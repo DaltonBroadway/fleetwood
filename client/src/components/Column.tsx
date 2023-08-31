@@ -3,9 +3,10 @@ import {
   ColumnContext,
   ColumnDispatchContext,
 } from "../contexts/ColumnContext";
+import { Id } from "../hooks/types";
 
-export const Column = ({ children }: { children: React.ReactNode }) => {
-  const columns = useContext(ColumnContext);
-  const columnsDispatch = useContext(ColumnDispatchContext);
-  return <div className="column-runner">{children}</div>;
+export const Column = ({ id }: { id: Id }) => {
+  const state = useContext(ColumnContext)[id];
+  const dispatch = useContext(ColumnDispatchContext);
+  return <div className="column"></div>;
 };
