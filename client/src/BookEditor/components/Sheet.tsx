@@ -5,9 +5,7 @@ import { CellContext } from "../contexts/CellContext";
 import { Column } from "./Column";
 import { Row } from "./Row";
 import { Cell } from "./Cell";
-import { Sheet as TSheet } from "../types";
-import { Target } from "../../Common/types";
-import { Id } from "../../Common/types";
+import { Sheet as TSheet, Id } from "../../shared/types";
 import { SheetContext, SheetDispatchContext } from "../contexts/SheetContext";
 
 export const Sheet = ({ id }: { id: Id }) => {

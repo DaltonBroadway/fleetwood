@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { Column } from "../types";
+import { Column } from "../../shared/types";
 import { useServerSyncedState } from "../../Common/hooks/useServerSyncedState";
 
 const [columns, columnsDispatch] = useServerSyncedState<Column>("column", {});

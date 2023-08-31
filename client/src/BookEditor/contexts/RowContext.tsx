@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { Row } from "../types";
+import { Row } from "../../shared/types";
 import { useServerSyncedState } from "../../Common/hooks/useServerSyncedState";
 
 const [rows, rowsDispatch] = useServerSyncedState<Row>("row", {});

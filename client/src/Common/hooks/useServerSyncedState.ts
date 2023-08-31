@@ -1,4 +1,4 @@
-import { Id, Action, StateAction, Target, State } from "../types";
+import { Id, Action, StateAction, Target, State } from "../../shared/types";
 import { useBasicReducer } from "./useBasicReducer";
 import { useSocket } from "./useSocket";
 

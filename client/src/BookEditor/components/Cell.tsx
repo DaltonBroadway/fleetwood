@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { CellContext, CellDispatchContext } from "../contexts/CellContext";
-import { Cell as TCell } from "../types";
-import { Id } from "../../Common/types";
+import { Cell as TCell, Id } from "../../shared/types";
 
 export const Cell = ({ id }: { id: Id }) => {
   const state = useContext(CellContext)[id];

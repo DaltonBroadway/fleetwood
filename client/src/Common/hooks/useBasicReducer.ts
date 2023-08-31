@@ -1,6 +1,6 @@
 // Basic create/update/delete reducer for maintaining component state.
 import { useReducer } from "react";
-import { State, StateAction } from "../types";
+import { State, StateAction } from "../../shared/types";
 
 const basicReducer = <T>(
   state: State<T>,

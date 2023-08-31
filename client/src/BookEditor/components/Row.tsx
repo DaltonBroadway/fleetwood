@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { RowContext, RowDispatchContext } from "../contexts/RowContext";
-import { Row as TRow } from "../types";
-import { Id } from "../../Common/types";
+import { Row as TRow, Id } from "../../shared/types";
 
 export const Row = ({ id }: { id: Id }) => {
   const state = useContext(RowContext)[id];
