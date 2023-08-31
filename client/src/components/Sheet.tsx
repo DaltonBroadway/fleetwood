@@ -5,14 +5,23 @@ import { CellContext } from "../contexts/CellContext";
 import { Column } from "./Column";
 import { Row } from "./Row";
 import { Cell } from "./Cell";
-import { Id } from "../hooks/types";
+import { Id, Target, Sheet as TSheet } from "../hooks/types";
+import { SheetContext, SheetDispatchContext } from "../contexts/SheetContext";
 
 export const Sheet = ({ id }: { id: Id }) => {
   const columns = useContext(ColumnContext);
   const rows = useContext(RowContext);
   const cells = useContext(CellContext);
+  const state = useContext(SheetContext)[id];
+  const dispatch = useContext(SheetDispatchContext);
+  const onChange = (change: TSheet) => {
+    dispatch(id, "update", change);
+  };
+  const onDelete = () => {
+    dispatch(id, "delete", {});
+  };
   return (
-    <div className="book">
+    <div className="sheet" key={id}>
       {Object.keys(columns).map((col_id) => {
         return <Column id={col_id} />;
       })}

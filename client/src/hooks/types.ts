@@ -1,29 +1,25 @@
 export type Id = string;
 
-interface Base {
-  id?: Id;
-}
+export type Sheet = {
+  seq?: number;
+  name?: string;
+};
 
-export interface Sheet extends Base {
-  seq: number;
-  name: string;
-}
+export type Column = {
+  seq?: number;
+  width?: number;
+};
 
-export interface Column extends Base {
-  seq: number;
-  width: number;
-}
+export type Row = {
+  seq?: number;
+  height?: number;
+};
 
-export interface Row extends Base {
-  seq: number;
-  height: number;
-}
-
-export interface Cell extends Base {
-  column: number;
-  row: number;
-  value: string;
-}
+export type Cell = {
+  column?: number;
+  row?: number;
+  value?: string;
+};
 
 export interface State<T> {
   [id: Id]: T;

@@ -1,9 +1,15 @@
 import { useContext } from "react";
 import { RowContext, RowDispatchContext } from "../contexts/RowContext";
-import { Id } from "../hooks/types";
+import { Id, Row as TRow } from "../hooks/types";
 
 export const Row = ({ id }: { id: Id }) => {
   const state = useContext(RowContext)[id];
   const dispatch = useContext(RowDispatchContext);
-  return <div className="row"></div>;
+  const onChange = (change: TRow) => {
+    dispatch(id, "update", change);
+  };
+  const onDelete = () => {
+    dispatch(id, "delete", {});
+  };
+  return <div className="row" key={id}></div>;
 };

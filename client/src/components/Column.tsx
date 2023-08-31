@@ -3,10 +3,16 @@ import {
   ColumnContext,
   ColumnDispatchContext,
 } from "../contexts/ColumnContext";
-import { Id } from "../hooks/types";
+import { Id, Column as TColumn } from "../hooks/types";
 
 export const Column = ({ id }: { id: Id }) => {
   const state = useContext(ColumnContext)[id];
   const dispatch = useContext(ColumnDispatchContext);
-  return <div className="column"></div>;
+  const onChange = (change: TColumn) => {
+    dispatch(id, "update", change);
+  };
+  const onDelete = () => {
+    dispatch(id, "delete", {});
+  };
+  return <div className="column" key={id}></div>;
 };
