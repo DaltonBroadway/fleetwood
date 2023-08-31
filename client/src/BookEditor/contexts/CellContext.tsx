@@ -1,6 +1,6 @@
 import { createContext } from "react";
-import { Cell } from "../hooks/types";
-import { useServerSyncedState } from "../hooks/useServerSyncedState";
+import { Cell } from "../types";
+import { useServerSyncedState } from "../../Common/hooks/useServerSyncedState";
 
 const [cells, cellsDispatch] = useServerSyncedState<Cell>("cell", {});
 

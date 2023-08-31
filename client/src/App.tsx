@@ -1,5 +1,5 @@
 import React from "react";
-import { Workspace } from "./components/Workspace";
+import { Workspace } from "./Workspace";
 
 export interface AppProps {}
 

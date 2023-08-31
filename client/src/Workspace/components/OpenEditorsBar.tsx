@@ -1,5 +1,5 @@
-import { ListBox } from "./common/ListBox";
-import { ListBoxItem } from "./common/ListBoxItem";
+import { ListBox } from "../../Common/components/ListBox";
+import { ListBoxItem } from "../../Common/components/ListBoxItem";
 import { EditorState, EditorPayload } from "../hooks/useEditor";
 
 interface IOpenEditorsBar {

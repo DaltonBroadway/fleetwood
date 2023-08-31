@@ -1,6 +1,6 @@
 import { createContext } from "react";
-import { Column } from "../hooks/types";
-import { useServerSyncedState } from "../hooks/useServerSyncedState";
+import { Column } from "../types";
+import { useServerSyncedState } from "../../Common/hooks/useServerSyncedState";
 
 const [columns, columnsDispatch] = useServerSyncedState<Column>("column", {});
 

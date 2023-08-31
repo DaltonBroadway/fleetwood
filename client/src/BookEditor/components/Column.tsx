@@ -3,7 +3,8 @@ import {
   ColumnContext,
   ColumnDispatchContext,
 } from "../contexts/ColumnContext";
-import { Id, Column as TColumn } from "../hooks/types";
+import { Column as TColumn } from "../types";
+import { Id } from "../../Common/types";
 
 export const Column = ({ id }: { id: Id }) => {
   const state = useContext(ColumnContext)[id];
