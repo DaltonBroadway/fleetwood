@@ -1,6 +1,6 @@
 import { Server, Socket } from "socket.io";
 import { Sheet, SyncedStateAction } from "../shared/types";
-import { usePublish } from "./usePublish";
+import { usePubSub } from "./usePubSub";
 import { columnHandler } from "./column";
 import { sheetHandler } from "./sheet";
 import { rowHandler } from "./row";
@@ -13,7 +13,7 @@ const handlers = [sheetHandler, columnHandler, rowHandler, cellHandler];
 //  LISTENER expects an array of state, loops through array and passes each individual state to the handler.
 //  This could be optimized
 export const registerHandlers = (io: Server, socket: Socket) => {
-  const publish = usePublish(socket);
+  const publish = usePubSub(socket);
   handlers.forEach(([target, handler]) => {
     socket.on(target, ({ parent_id, state }: SyncedStateAction<Sheet>) =>
       state.forEach((st) => {
