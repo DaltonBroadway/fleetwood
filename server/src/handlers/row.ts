@@ -1,4 +1,4 @@
-import { Cell, Id, StateAction, Target } from "../shared/types";
+import { Id, Row, StateAction, Target } from "../shared/types";
 import { useBasicHandler } from "./useBasicHandler";
 
 //  1. Only exports [target, fn]. fn switches incoming actions with individual
@@ -9,26 +9,26 @@ import { useBasicHandler } from "./useBasicHandler";
 //  5. Individual handlers return an optional value which is the result of the
 //     callback passed in
 
-const TARGET: Target = "cell";
+const TARGET: Target = "row";
 
-const createHandler = (parent_id: Id, payload: Cell) => {};
+const createHandler = (parent_id: Id, payload: Row) => {};
 
-const updateHandler = (id: Id, payload: Cell) => {};
+const updateHandler = (id: Id, payload: Row) => {};
 
-const deleteHandler = (id: Id, payload: Cell) => {};
+const deleteHandler = (id: Id, payload: Row) => {};
 
-const badAction = (parent_id: Id, id: Id, action: string, payload: Cell) => {};
+const badAction = (parent_id: Id, id: Id, action: string, payload: Row) => {};
 
-const basicHandler = useBasicHandler<Cell>(
+const basicHandler = useBasicHandler<Row>(
   createHandler,
   updateHandler,
   deleteHandler,
   badAction
 );
 
-export const cellHandler: _T = [TARGET, basicHandler];
+export const rowHandler: _T = [TARGET, basicHandler];
 
 type _T = [
   Target,
-  (parent_id: string, { id, action, payload }: StateAction<Cell>) => void
+  (parent_id: string, { id, action, payload }: StateAction<Row>) => void
 ];

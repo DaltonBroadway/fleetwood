@@ -1,7 +1,7 @@
 import http from "http";
 import express from "express";
-import { ServerSocket } from "./socket";
-import { handlers } from "./handlers";
+import { startSocket } from "./socket";
+import { registerHandlers } from "./handlers";
 const PORT = 3000;
 const app = express();
 
@@ -9,7 +9,7 @@ const app = express();
 const httpServer = http.createServer(app);
 
 /** Start Socket */
-new ServerSocket(httpServer, handlers);
+const io = startSocket(httpServer, registerHandlers);
 
 /** Log the request */
 app.use((req, res, next) => {
