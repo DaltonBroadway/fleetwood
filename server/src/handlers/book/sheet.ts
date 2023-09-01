@@ -1,5 +1,5 @@
-import { Id, Sheet, StateAction, Target } from "../shared/types";
-import { useBasicHandler } from "./useBasicHandler";
+import { Id, Sheet, StateAction, Target } from "../../shared/types";
+import { useBasicHandler } from "../useBasicHandler";
 
 //  1. Only exports [target, fn]. fn switches incoming actions with individual
 //     handlers.
