@@ -9,7 +9,7 @@ const app = express();
 const httpServer = http.createServer(app);
 
 /** Start Socket */
-const io = startSocket(httpServer, registerHandlers);
+const io = startSocket(httpServer, [registerHandlers]);
 
 /** Log the request */
 app.use((req, res, next) => {

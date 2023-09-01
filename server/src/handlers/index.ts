@@ -1,4 +1,4 @@
-import { Socket } from "socket.io";
+import { Server, Socket } from "socket.io";
 import { Sheet, SyncedStateAction } from "../shared/types";
 import { usePublish } from "./usePublish";
 import { columnHandler } from "./column";
@@ -12,7 +12,7 @@ const handlers = [sheetHandler, columnHandler, rowHandler, cellHandler];
 //  Takes 1 server and registers all listeners to it.
 //  LISTENER expects an array of state, loops through array and passes each individual state to the handler.
 //  This could be optimized
-export const registerHandlers = (socket: Socket) => {
+export const registerHandlers = (io: Server, socket: Socket) => {
   const publish = usePublish(socket);
   handlers.forEach(([target, handler]) => {
     socket.on(target, ({ parent_id, state }: SyncedStateAction<Sheet>) =>

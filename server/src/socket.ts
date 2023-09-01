@@ -3,11 +3,11 @@ import { Socket, Server } from "socket.io";
 
 // Takes an HTTP server and a handler register.
 // register fn runs on socket connection and takes only the socket as an arg.
-// All logic should be handled in a handler fns and registered
+// All logic should be handled in a handler fns and registered with a register fn
 // Returns the server
 export const startSocket = (
   server: HTTPServer,
-  register: (socket: Socket) => void
+  registers: ((io: Server, socket: Socket) => void)[]
 ) => {
   const io = new Server(server, {
     serveClient: false,
@@ -20,7 +20,7 @@ export const startSocket = (
   });
   io.on("connect", (socket) => {
     console.info("User " + socket.id + " Connected");
-    register(socket);
+    registers.forEach((register) => register(io, socket));
     socket.on("disconnect", () => {
       console.info("User " + socket.id + " Disconnected");
     });
