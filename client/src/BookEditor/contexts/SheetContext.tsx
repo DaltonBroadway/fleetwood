@@ -1,19 +1,20 @@
 // Provides a list of objects that represent child component state
 // and a function to update both local and server state through context
 import { createContext } from "react";
-import { Sheet } from "../../shared/types";
+import { Action, Sheet, State } from "../../shared/types";
 import { useServerSyncedState } from "../../Common/hooks/useServerSyncedState";
 
-const [sheets, sheetsDispatch] = useServerSyncedState<Sheet>("sheet", {});
-
-export const SheetContext = createContext(sheets);
-export const SheetDispatchContext = createContext(sheetsDispatch);
+export const SheetContext = createContext({} as State<Sheet>);
+export const SheetDispatchContext = createContext(
+  (id: string, action: Action, payload: Sheet) => {}
+);
 
 export const SheetContextComponent = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
+  const [sheets, sheetsDispatch] = useServerSyncedState<Sheet>("sheet", {});
   return (
     <SheetContext.Provider value={sheets}>
       <SheetDispatchContext.Provider value={sheetsDispatch}>

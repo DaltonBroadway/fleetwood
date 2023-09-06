@@ -1,17 +1,18 @@
 import { createContext } from "react";
-import { Column } from "../../shared/types";
+import { Action, Column, State } from "../../shared/types";
 import { useServerSyncedState } from "../../Common/hooks/useServerSyncedState";
 
-const [columns, columnsDispatch] = useServerSyncedState<Column>("column", {});
-
-export const ColumnContext = createContext(columns);
-export const ColumnDispatchContext = createContext(columnsDispatch);
+export const ColumnContext = createContext({} as State<Column>);
+export const ColumnDispatchContext = createContext(
+  (id: string, action: Action, payload: Column) => {}
+);
 
 export const ColumnContextComponent = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
+  const [columns, columnsDispatch] = useServerSyncedState<Column>("column", {});
   return (
     <ColumnContext.Provider value={columns}>
       <ColumnDispatchContext.Provider value={columnsDispatch}>

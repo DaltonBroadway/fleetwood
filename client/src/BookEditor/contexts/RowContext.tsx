@@ -1,17 +1,18 @@
 import { createContext } from "react";
-import { Row } from "../../shared/types";
+import { Action, Row, State } from "../../shared/types";
 import { useServerSyncedState } from "../../Common/hooks/useServerSyncedState";
 
-const [rows, rowsDispatch] = useServerSyncedState<Row>("row", {});
-
-export const RowContext = createContext(rows);
-export const RowDispatchContext = createContext(rowsDispatch);
+export const RowContext = createContext({} as State<Row>);
+export const RowDispatchContext = createContext(
+  (id: string, action: Action, payload: Row) => {}
+);
 
 export const RowContextComponent = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
+  const [rows, rowsDispatch] = useServerSyncedState<Row>("row", {});
   return (
     <RowContext.Provider value={rows}>
       <RowDispatchContext.Provider value={rowsDispatch}>
