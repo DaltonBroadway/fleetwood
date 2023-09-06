@@ -1,0 +1,11 @@
+div.book {
+  display: grid;
+  /* grid-template-columns: 22% 22% auto; */
+  grid-template-rows: auto 10%;
+}
+
+div.sheet {
+  display: grid;
+  grid-template-columns: repeat(3, 12px);
+  grid-template-rows: repeat(3, auto);
+}
