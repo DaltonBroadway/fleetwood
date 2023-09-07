@@ -1,5 +1,4 @@
 import React from "react";
-import { Workspace } from "./Workspace";
 import { BookEditor } from "./BookEditor";
 import { Book } from "./BookEditor/components/Book";
 
