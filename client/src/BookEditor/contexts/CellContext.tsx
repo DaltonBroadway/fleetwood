@@ -1,6 +1,9 @@
 import { createContext } from "react";
 import { State, Action, Cell } from "../../shared/types";
-import { useServerSyncedState } from "../../Common/hooks/useServerSyncedState";
+import { useServerSyncedState } from "../../common/hooks/useServerSyncedState";
+
+//  1. Initializes server synced state reducer
+//  2. Provides context: [State<Cell>, dispatch]
 
 export const CellContext = createContext({} as State<Cell>);
 export const CellDispatchContext = createContext(

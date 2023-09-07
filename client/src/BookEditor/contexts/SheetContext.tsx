@@ -1,8 +1,9 @@
-// Provides a list of objects that represent child component state
-// and a function to update both local and server state through context
 import { createContext } from "react";
 import { Action, Sheet, State } from "../../shared/types";
-import { useServerSyncedState } from "../../Common/hooks/useServerSyncedState";
+import { useServerSyncedState } from "../../common/hooks/useServerSyncedState";
+
+//  1. Initializes server synced state reducer
+//  2. Provides context: [State<Sheet>, dispatch]
 
 export const SheetContext = createContext({} as State<Sheet>);
 export const SheetDispatchContext = createContext(
