@@ -7,12 +7,13 @@ export const RowDispatchContext = createContext(
   (id: string, action: Action, payload: Row) => {}
 );
 
-export const RowContextComponent = ({
-  children,
-}: {
+type Props = {
+  initialState: State<Row>;
   children: React.ReactNode;
-}) => {
-  const [rows, rowsDispatch] = useServerSyncedState<Row>("row", {});
+};
+
+export const RowContextComponent = ({ initialState, children }: Props) => {
+  const [rows, rowsDispatch] = useServerSyncedState<Row>("row", initialState);
   return (
     <RowContext.Provider value={rows}>
       <RowDispatchContext.Provider value={rowsDispatch}>

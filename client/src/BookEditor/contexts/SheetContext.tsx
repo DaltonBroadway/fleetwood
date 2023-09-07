@@ -9,12 +9,16 @@ export const SheetDispatchContext = createContext(
   (id: string, action: Action, payload: Sheet) => {}
 );
 
-export const SheetContextComponent = ({
-  children,
-}: {
+type Props = {
+  initialState: State<Sheet>;
   children: React.ReactNode;
-}) => {
-  const [sheets, sheetsDispatch] = useServerSyncedState<Sheet>("sheet", {});
+};
+
+export const SheetContextComponent = ({ initialState, children }: Props) => {
+  const [sheets, sheetsDispatch] = useServerSyncedState<Sheet>(
+    "sheet",
+    initialState
+  );
   return (
     <SheetContext.Provider value={sheets}>
       <SheetDispatchContext.Provider value={sheetsDispatch}>

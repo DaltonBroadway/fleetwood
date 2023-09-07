@@ -7,12 +7,16 @@ export const ColumnDispatchContext = createContext(
   (id: string, action: Action, payload: Column) => {}
 );
 
-export const ColumnContextComponent = ({
-  children,
-}: {
+type Props = {
+  initialState: State<Column>;
   children: React.ReactNode;
-}) => {
-  const [columns, columnsDispatch] = useServerSyncedState<Column>("column", {});
+};
+
+export const ColumnContextComponent = ({ initialState, children }: Props) => {
+  const [columns, columnsDispatch] = useServerSyncedState<Column>(
+    "column",
+    initialState
+  );
   return (
     <ColumnContext.Provider value={columns}>
       <ColumnDispatchContext.Provider value={columnsDispatch}>

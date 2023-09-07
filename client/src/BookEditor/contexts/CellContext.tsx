@@ -7,12 +7,16 @@ export const CellDispatchContext = createContext(
   (id: string, action: Action, payload: Cell) => {}
 );
 
-export const CellContextComponent = ({
-  children,
-}: {
+type Props = {
+  initialState: State<Cell>;
   children: React.ReactNode;
-}) => {
-  const [cells, cellsDispatch] = useServerSyncedState<Cell>("cell", {});
+};
+
+export const CellContextComponent = ({ initialState, children }: Props) => {
+  const [cells, cellsDispatch] = useServerSyncedState<Cell>(
+    "cell",
+    initialState
+  );
   return (
     <CellContext.Provider value={cells}>
       <CellDispatchContext.Provider value={cellsDispatch}>

@@ -4,11 +4,12 @@ import { CellContextComponent } from "../contexts/CellContext";
 import { SheetContextComponent } from "../contexts/SheetContext";
 
 export const BookEditor = ({ children }: { children: React.ReactNode }) => {
+  // TODO add a hook here for caching
   return (
-    <SheetContextComponent>
-      <ColumnContextComponent>
-        <RowContextComponent>
-          <CellContextComponent>
+    <SheetContextComponent initialState={{}}>
+      <ColumnContextComponent initialState={{}}>
+        <RowContextComponent initialState={{}}>
+          <CellContextComponent initialState={{}}>
             <div className="book-editor">{children}</div>
           </CellContextComponent>
         </RowContextComponent>
