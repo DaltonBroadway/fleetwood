@@ -1,11 +1,38 @@
+div.book-editor {
+  display: grid;
+  height: 600px;
+  background-color: red;
+}
+
 div.book {
   display: grid;
-  /* grid-template-columns: 22% 22% auto; */
-  grid-template-rows: auto 10%;
+  align-self: stretch;
+  justify-self: stretch;
+  grid-template-rows: auto min-content;
+  background-color: blue;
 }
 
 div.sheet {
   display: grid;
+  align-self: stretch;
+  justify-self: stretch;
   grid-template-columns: repeat(3, 12px);
   grid-template-rows: repeat(3, auto);
+  background-color: darkkhaki;
+}
+
+div.sheet-selector {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: rgb(97, 97, 97);
+}
+
+div.sheet-tab {
+  padding: 4px;
+  background-color: rgb(218, 218, 218);
+}
+
+div.sheet-tab.active {
+  background-color: rgb(161, 161, 161);
 }

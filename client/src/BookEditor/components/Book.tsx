@@ -1,14 +1,20 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SheetContext } from "../contexts/SheetContext";
 import { Sheet } from "./Sheet";
+import { Id } from "../../shared/types";
+import { SheetSelector } from "./SheetSelector";
 
 export const Book = () => {
-  const sheets = useContext(SheetContext);
+  const sheetIds = Object.keys(useContext(SheetContext));
+  const [activeSheet, setActiveSheet] = useState("vw3g" as Id); // TEMPORARY
   return (
     <div className="book">
-      {Object.keys(sheets).map((sheet_id) => {
-        return <Sheet id={sheet_id} />;
-      })}
+      <Sheet id={activeSheet} />
+      <SheetSelector
+        sheetIds={sheetIds}
+        active={activeSheet}
+        setActive={setActiveSheet}
+      />
     </div>
   );
 };
