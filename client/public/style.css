@@ -1,31 +1,70 @@
-div.book-editor {
-  display: grid;
-  height: 600px;
-  background-color: red;
+body {
+  margin: 0;
+  display: block;
+}
+
+div.editor-window {
+  display: block;
+  width: 1200px;
+  height: 800px;
 }
 
 div.book {
   display: grid;
-  align-self: stretch;
-  justify-self: stretch;
-  grid-template-rows: auto min-content;
+  width: 100%;
+  height: 100%;
   background-color: blue;
+  grid-template-rows: auto, min-content;
 }
 
 div.sheet {
   display: grid;
-  align-self: stretch;
-  justify-self: stretch;
-  grid-template-columns: repeat(3, 12px);
-  grid-template-rows: repeat(3, auto);
-  background-color: darkkhaki;
+  overflow: hidden;
+  grid-auto-columns: min-content;
+  grid-auto-rows: min-content;
+  background-color: rgb(150, 150, 150);
+  max-height: 100vh;
+}
+
+div.sheet:hover {
+  overflow: scroll;
+}
+
+.header-label {
+  background-color: aliceblue;
+  border-bottom: 1px solid blueviolet;
+  border-right: 1px solid blueviolet;
+  position: sticky;
+}
+
+.header-label.corner {
+  grid-row: 1/1;
+  grid-column: 1/1;
+  height: 20px;
+}
+
+.header-label.column {
+  grid-row: 1/1;
+  height: 20px;
+  width: 100px;
+  top: 0;
+}
+
+.header-label.row {
+  grid-column: 1/1;
+  height: 20px;
+  padding-left: 3px;
+  padding-right: 3px;
+  left: 0;
 }
 
 div.sheet-selector {
+  grid-row: 2;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   background-color: rgb(97, 97, 97);
+  border-top: 2px solid rgb(161, 161, 161);
 }
 
 div.sheet-tab {

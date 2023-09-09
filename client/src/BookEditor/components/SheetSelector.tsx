@@ -10,7 +10,7 @@ export const SheetSelector = ({ active, setActive }: Props) => {
   const sheets = useContext(SheetContext);
   return (
     <div className="sheet-selector">
-      {Object.keys(useContext(SheetContext)).map((sheetId) => {
+      {Object.keys(sheets).map((sheetId) => {
         return (
           <div
             className={`sheet-tab${sheetId === active ? " active" : ""}`}
